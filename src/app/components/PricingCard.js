@@ -4,7 +4,7 @@ import { MdOutlineStars } from "react-icons/md";
 const PricingCard = ({ props }) => (
   <div
     className={`bg-[#F7F7F7] flex flex-col w-full h-auto sm:h-auto md:h-auto rounded-[20px] p-4 mx-1 transition-all duration-200 ease-in-out hover:-translate-y-1 scale-98 hover:scale-103 mb-3 ${
-      props.elgoPackage ? "border-[#3a3aff] border-[0.5px]" : ""
+      props.elgoPackage ? "border-[#3a3aff] border-[0.5px]" : "border-black border-[0.5px]"
     }`}
   >
     {/* bg-gradient-to-r from-[#6ec3f4] via-[#3a3aff] to-[#ff61ab] */}
@@ -72,6 +72,7 @@ const PricingCard = ({ props }) => (
             </div>
           </h4>
         </div>
+        {/* Add Prop to hide or show and also make the whole thing redirect to dashboard if not logged in from home page */}
         <div className="flex mt-2 justify-center items-center">
           <button
             className={`w-3/4 flex justify-center rounded-md p-2 items-center ${

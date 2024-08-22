@@ -4,7 +4,7 @@ const styles = {
     heading2:
       "font-playfair font-semibold xs:text-[48px] text-[52px] text-[#1E1E1E] xs:leading-[76.8px] leading-[66.8px] w-full",
     heading2Updated:
-      "font-playfair font-semibold xs:text-[48px] text-[42px] text-white xs:leading-[76.8px] leading-[66.8px] w-full",
+      "font-playfair font-semibold xs:text-[48px] text-[42px] text-[#1E1E1E] xs:leading-[76.8px] leading-[66.8px] w-full",
     paragraph:
       "font-playfair font-normal text-[#1E1E1E] text-[24px] leading-[30.8px]",
   

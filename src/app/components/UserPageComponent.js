@@ -29,9 +29,9 @@ export default function UserPageComponent() {
           </div>
         </span>
 
-        <div className="w-full items-center flex-col h-1/2 justify-center font-bold text-[10px] text-white sm:text-md z-30 text-black py-5 sm:hidden flex">
+        <div className="w-full items-center flex-col h-1/2 justify-center font-bold text-[10px] text-white sm:text-md z-30 py-5 sm:hidden flex">
           Welcome {user?.name}.
-          <div className="w-full items-center text-white justify-center font-bold text-[10px] sm:text-md z-30 text-black py-5 sm:hidden flex">
+          <div className="w-full items-center text-white justify-center font-bold text-[10px] sm:text-md z-30 py-5 sm:hidden flex">
             Your Dashboard.
           </div>
         </div>
