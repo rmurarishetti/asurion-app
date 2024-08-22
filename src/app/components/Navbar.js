@@ -31,9 +31,11 @@ import styles from "../constants/styles";
 import { usePathname } from "next/navigation";
 import { NavLinks } from "../constants";
 import { Icon } from "../../../public";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const Navbar = () => {
   const currentRoute = usePathname();
+  const { user, isLoading } = useUser();
 
   return (
     <header>
@@ -46,8 +48,8 @@ const Navbar = () => {
               <Image src={Icon} alt="logo" className="w-[54px] h-[52px]" />
             </Link>
           </div>
-          <ul className="list-none sm:flex hidden justify-end items-center flex-1 pr-1">
-            {NavLinks.map((nav, i) => (
+          <ul className="list-none sm:flex hidden justify-end flex-1 pr-1">
+            {NavLinks.slice(0, user ? 1 : NavLinks.length).map((nav, i) => (
               <li
                 key={nav.id}
                 className={`font-playfair font-normal cursor-pointer text-[14px] ${
@@ -61,6 +63,16 @@ const Navbar = () => {
                 <Link href={nav.link}>{nav.title}</Link>
               </li>
             ))}
+            {user && (
+              <li className="font-playfair font-normal cursor-pointer items-center text-[14px] text-[#292929] hover:text-[#FFFFFF] mr-10">
+                <Link href={"/user/"}>Dashboard</Link>
+              </li>
+            )}
+            {user && (
+              <li className="font-playfair font-normal cursor-pointer text-[14px] text-[#292929] hover:text-[#FFFFFF]">
+                <Link href={"/api/auth/logout"}>Sign Out</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>

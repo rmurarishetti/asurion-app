@@ -11,7 +11,7 @@ export const NavLinks = [
     },
     {
         id:"signin",
-        title: "Login/Register",
+        title: "Your Account",
         link: "/api/auth/login"
 
     }
