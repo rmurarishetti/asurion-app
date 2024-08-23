@@ -1,5 +1,5 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import styles from "../constants/styles";
 import { layout } from "../constants/styles";
 import Image from "next/image";
@@ -7,6 +7,7 @@ import { heroImage } from "../../../public";
 import Link from "next/link";
 
 const Business = () => {
+
   return (
     <section id="features" className={layout.section}>
       <div className={layout.sectionInfo}>
