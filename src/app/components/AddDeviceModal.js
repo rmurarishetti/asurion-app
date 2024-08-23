@@ -80,21 +80,6 @@ export default function AddDeviceModal() {
 
   const [open, setOpen] = useState(false);
 
-  const [state, setState] = useState({
-    Name: "",
-    Status: "",
-    Phone: "",
-    NRIC: "",
-    Email: "",
-  });
-
-  const handleChange = (e) => {
-    setState({
-      ...state,
-      [e.target.id]: e.target.value,
-    });
-  };
-
   const handleSubmit = (e) => {};
 
   return (

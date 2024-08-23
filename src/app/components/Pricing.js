@@ -52,7 +52,7 @@ export default function Pricing() {
       >
         <div className="flex flex-row">
           {pricingPackages.map((pricingPackage, index) => (
-            <PricingCard key={index} props={pricingPackage} />
+            <PricingCard key={index} props={pricingPackage} dash={false} />
           ))}
         </div>
       </div>

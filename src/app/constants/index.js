@@ -20,7 +20,7 @@ export const NavLinks = [
 
   export const pricingPackages =[
     {
-      id: "pricing-1",
+      id: "CAzkFpQf53ixIQjTurIg",
       title: "Asurion Basic",
       recommended: "Basic",
       content:["Upto 3 Devices", "All maintainence, repair and damages covered for 1 year.", "For Laptops, Phones and Tablets"],
@@ -30,7 +30,7 @@ export const NavLinks = [
       elgoPackage: false
     },
     {
-      id: "pricing-2",
+      id: "DQ3CI0QSEn5zCsYiR7Ge",
       title:"Asurion Advanced",
       recommended:"Recommended",
       content:["Upto 5 Devices", "Rapid Service Requests served in less than 3 hrs", "All maintainence, repair and damages covered for 2 years.", "For Laptops, Phones and Tablets"],
@@ -40,7 +40,7 @@ export const NavLinks = [
       elgoPackage: true
     },
     {
-      id: "pricing-3",
+      id: "9A3NVKDCNgCa7T8MRl1V",
       title:"Asurion Pro",
       recommended:"Premium",
       content:["Upto 6 Devices", "Rapid Service Requests served in less than 3 hrs", "All maintainence, repair and damages covered for 3 years.", "For Laptops, Phones and Tablets", "Latest Device Upgrade and Replacement for a nominal fee."],
