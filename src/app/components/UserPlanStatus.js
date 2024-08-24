@@ -127,7 +127,7 @@ export default function UserPlanStatus(props) {
               {...device.data()}
             ></DeviceDetailComponent>
           ))}
-          {addDeviceBtn && <AddDeviceModal />}
+          {addDeviceBtn && <AddDeviceModal {...props} />}
         </div>
       </div>
     </section>

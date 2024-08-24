@@ -6,35 +6,45 @@ import React, { useEffect } from "react";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { MdDevicesOther } from "react-icons/md";
 import { useState } from "react";
-// import { collection, addDoc } from "firebase/firestore";
-// import db from "../../../utils/firestore";
 import { useRouter } from "next/navigation";
 import DeviceDetailComponent from "./DeviceDetailComponent";
 import db from "../utils/firestore";
-import { query, getDocs, collection } from "@firebase/firestore";
+import { getDocs, collection, addDoc } from "@firebase/firestore";
 
-
-export default function AddDeviceModal() {
+export default function AddDeviceModal(props) {
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = (e) => {};
+  async function SubmitDevice(data) {
+
+    const deviceCollection = collection(db, `Users/${props.id}/Devices`);
+    const docRef = await addDoc(deviceCollection, data);
+
+    if (docRef.id) {
+      setOpen(false);
+      router.push(`/confirmation`);
+    } else {
+      alert("An error occurred. Please try again");
+    }
+
+  }
 
   const [deviceArr, setDeviceArr] = useState([]);
 
   const deviceCollection = collection(db, "Devices");
 
-  async function getAllDevices(){
+  async function getAllDevices() {
     const q = await getDocs(deviceCollection);
-    if (q.docs.length > 0){
-      setDeviceArr(q.docs)
+    if (q.docs.length > 0) {
+      setDeviceArr(q.docs);
     }
   }
 
   const handleOpen = async () => {
+    console.log(props);
     await getAllDevices().then(setOpen(true));
-  }
+  };
 
   return (
     <Dialog.Root open={open}>
@@ -59,26 +69,18 @@ export default function AddDeviceModal() {
             Register New Device.
           </Dialog.Title>
           <Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
-            Make changes to the form here. Click save when you&apos;re done.
+            Add Devices from the options below. Click the device you want to add
+            when you&apos;re done.
           </Dialog.Description>
           <div className="grid grid-cols-3 gap-4">
-            {/* <button onClick={() => setOpen(false)}>
-              <DeviceDetailComponent />
-            </button> */}
-            {deviceArr?.map((device, i)=>(
-              <button key={i} onClick={handleSubmit}>
-                <DeviceDetailComponent key={i} {...device.data()}></DeviceDetailComponent>
+            {deviceArr?.map((device, i) => (
+              <button onClick={() => SubmitDevice(device.data())} key={i}>
+                <DeviceDetailComponent
+                  key={i}
+                  {...device.data()}
+                ></DeviceDetailComponent>
               </button>
-              
             ))}
-          </div>
-          <div className="mt-[25px] flex justify-end">
-            <button
-              onClick={handleSubmit}
-              className="bg-[#635BFF] text-white focus:shadow-green7 inline-flex h-[35px] items-center justify-center rounded-[4px] px-[15px] font-medium leading-none focus:shadow-[0_0_0_2px] focus:outline-none"
-            >
-              Submit
-            </button>
           </div>
           <button
             onClick={() => setOpen(false)}
