@@ -30,12 +30,10 @@ export default function AddDeviceModal() {
     if (q.docs.length > 0){
       setDeviceArr(q.docs)
     }
-    //console.log(deviceArr);
   }
 
   const handleOpen = async () => {
     await getAllDevices().then(setOpen(true));
-    //setOpen(true);
   }
 
   return (

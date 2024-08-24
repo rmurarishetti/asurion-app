@@ -5,8 +5,47 @@ import { MdOutlineStars } from "react-icons/md";
 import { LuCheckCircle } from "react-icons/lu";
 import DeviceDetailComponent from "./DeviceDetailComponent";
 import AddDeviceModal from "./AddDeviceModal";
+import db from "../utils/firestore";
+import { pricingPackages } from "../constants";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "@firebase/firestore";
 
-export default function UserPlanStatus() {
+export default function UserPlanStatus(props) {
+  const [planDeets, setPlanDeets] = useState({});
+  const [addDeviceBtn, setAddDeviceBtn] = useState(true);
+  const [deviceArr, setDeviceArr] = useState([]);
+
+  useEffect(() => {
+    function populatePlanDeets() {
+      pricingPackages.forEach((pack, i) => {
+        if (pack.id == props.plan) {
+          setPlanDeets(pack);
+        }
+      });
+    }
+
+    async function getAllDevices() {
+      const deviceCollection = collection(db, `Users/${props.id}/Devices`);
+      const snapshot = await getDocs(deviceCollection);
+      var limit = 0;
+
+      pricingPackages.forEach((pack, i) => {
+        if (pack.id == props.plan) {
+          limit = pack.devices;
+        }
+      });
+      if (snapshot.docs.length < limit) {
+        setDeviceArr(snapshot.docs);
+        setAddDeviceBtn(true);
+      } else {
+        setAddDeviceBtn(false);
+      }
+    }
+
+    populatePlanDeets();
+    getAllDevices();
+  }, []);
+
   return (
     <section className={layout.section}>
       <div className={layout.sectionInfo}>
@@ -30,7 +69,7 @@ export default function UserPlanStatus() {
             <h4
               className={`font-poppins font-semibold text-lg sm:text-xl md:text-[20px] leading-[23px] ${"text-black"} mb-1 inline-block`}
             >
-              Asurion {"Basic"}
+              {planDeets.title}
             </h4>
           </div>
           <div className="flex justify-start m-2 items-center">
@@ -51,9 +90,7 @@ export default function UserPlanStatus() {
                 <div
                   className={`w-full text-justify font-poppins font-medium text-xs sm:text-sm md:text-[12px] inline-block ${"text-black"}`}
                 >
-                  {
-                    "Asurion Basic covers upto 3 devices for a year from all damages, repairs and maintainence costs. The devices can range from phones, tablets to laptops."
-                  }
+                  {planDeets.description}
                 </div>
               </div>
             </div>
@@ -62,14 +99,14 @@ export default function UserPlanStatus() {
                 <h4
                   className={`font-poppins font-semibold text-sm sm:text-base md:text-[12px] leading-[23px] ${"text-black"} mb-1 inline-block`}
                 >
-                  Valid for {"1 year"}
+                  Valid for {planDeets.duration}
                 </h4>
               </div>
               <div className="flex items-end justify-start ml-2 mb-2">
                 <h4
                   className={`font-poppins font-semibold text-lg sm:text-xl md:text-[20px] leading-[23px] ${"text-black"} mb-1 inline-block`}
                 >
-                  {"$12.99"}
+                  {planDeets.pricing}
                   <div
                     className={`font-poppins font-light text-sm sm:text-base md:text-[15px] ${"text-black"} inline-block`}
                   >
@@ -84,12 +121,13 @@ export default function UserPlanStatus() {
       <div className={layout.sectionInfo}>
         <h2 className={styles.heading2Updated}>Devices covered.</h2>
         <div className="grid grid-cols-2 gap-4">
-            <DeviceDetailComponent/>
-            <DeviceDetailComponent/>
-            <DeviceDetailComponent/>
-            <DeviceDetailComponent/>
-            <DeviceDetailComponent/>
-            <AddDeviceModal/>
+          {deviceArr?.map((device, i) => (
+            <DeviceDetailComponent
+              key={i}
+              {...device.data()}
+            ></DeviceDetailComponent>
+          ))}
+          {addDeviceBtn && <AddDeviceModal />}
         </div>
       </div>
     </section>
