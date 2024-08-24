@@ -27,16 +27,17 @@ export default function UserPlanStatus(props) {
     async function getAllDevices() {
       const deviceCollection = collection(db, `Users/${props.id}/Devices`);
       const snapshot = await getDocs(deviceCollection);
-      var limit = 0;
+      var limit;
 
       pricingPackages.forEach((pack, i) => {
         if (pack.id == props.plan) {
           limit = pack.devices;
         }
       });
+
+      setDeviceArr(snapshot.docs);
       if (snapshot.docs.length < limit) {
-        setDeviceArr(snapshot.docs);
-        setAddDeviceBtn(true);
+          setAddDeviceBtn(true);
       } else {
         setAddDeviceBtn(false);
       }

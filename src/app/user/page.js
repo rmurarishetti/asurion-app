@@ -7,6 +7,7 @@ import UserPlanStatus from "../components/UserPlanStatus";
 import { useEffect, useState } from "react";
 import db from "../utils/firestore";
 import { addDoc, collection, getDocs, query, where } from "@firebase/firestore";
+import GenAIComponent from "../components/Genaicomponent";
 
 export default withPageAuthRequired(function Page() {
   const { user, error, isLoading } = useUser();
@@ -61,6 +62,7 @@ export default withPageAuthRequired(function Page() {
       <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           {!planExists && <UserChoosePlans />}
+          {planExists && <GenAIComponent {...userStats} {...userId} />}
           {planExists && <UserPlanStatus {...userStats} {...userId} />}
         </div>
       </div>
