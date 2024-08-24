@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import UserPageComponent from "../components/UserPageComponent";
 import styles from "../constants/styles";
@@ -18,22 +18,21 @@ export default withPageAuthRequired(function Page() {
   const [userStats, setUserStats] = useState({});
   const [userId, setUserId] = useState({});
 
-  useEffect(()=>{
+  useEffect(() => {
     upsertUser();
-  },[])
-  
+  }, []);
 
-  async function upsertUser(){
-    if (user && user.email){
-      const q = query(userCollection, where("email", "==", user.email))
+  async function upsertUser() {
+    if (user && user.email) {
+      const q = query(userCollection, where("email", "==", user.email));
       const snapshot = await getDocs(q);
-      if (snapshot.docs.length>0){
+      if (snapshot.docs.length > 0) {
         const userData = snapshot.docs[0].data();
-        setUserId({id:snapshot.docs[0].id});
-        if (userData.plan  == "" || !userData.plan){
-          setPlanExists(false)
+        setUserId({ id: snapshot.docs[0].id });
+        if (userData.plan == "" || !userData.plan) {
+          setPlanExists(false);
         } else {
-          setPlanExists(true)
+          setPlanExists(true);
           setUserStats(userData);
         }
       } else {
@@ -41,13 +40,13 @@ export default withPageAuthRequired(function Page() {
           name: user.name,
           email: user.email,
           plan: "",
-          limit:"",
-          validity:"",
+          limit: "",
+          validity: "",
         });
 
         if (docRef.id) {
-          console.log("User Created")
-          setUserId({id:docRef.id});
+          console.log("User Created");
+          setUserId({ id: docRef.id });
         } else {
           alert("An error occurred. Please try again");
         }
@@ -55,10 +54,9 @@ export default withPageAuthRequired(function Page() {
     }
   }
 
-
   return (
     <main className="flex flex-col min-h-min justify-between bg-transparent pb-10">
-      <UserPageComponent/>
+      <UserPageComponent />
       <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth}`}>
           {!planExists && <UserChoosePlans />}

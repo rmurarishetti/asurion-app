@@ -40,12 +40,14 @@ const Hero = () => {
       <div className="z-0">
         <canvas className="w-full"></canvas>
       </div>
-      
+
       <div className="absolute top-0 sm:left-12 flex sm:w-1/2 w-full h-full justify-center z-30">
         <span className="md:text-5xl lg:text-6xl sm:text-lg pl-8 sm:flex-col flex font-bold justify-center items-center hidden sm:flex sm:items-start text-black/75 py-5">
           <div className="text-white/75"> Your Tech. Fixed.</div>
           <div className="py-2"></div>
-          <div className="md:text-xl lg:text-3xl sm:text-sm">From breaks to bugs, we have it covered.</div>
+          <div className="md:text-xl lg:text-3xl sm:text-sm">
+            From breaks to bugs, we have it covered.
+          </div>
         </span>
 
         <div className="w-full items-center flex-col h-1/2 justify-center font-bold text-[10px] text-white sm:text-md z-30 py-5 sm:hidden flex">

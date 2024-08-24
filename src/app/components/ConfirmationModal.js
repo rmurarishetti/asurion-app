@@ -1,5 +1,3 @@
-//For Choosing Plan in Dashboard
-
 "use client";
 import * as Dialog from "@radix-ui/react-dialog";
 import React, { useEffect } from "react";
@@ -9,7 +7,16 @@ import { useRouter } from "next/navigation";
 import db from "../utils/firestore";
 import { LuCheckCircle } from "react-icons/lu";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { getDoc, doc, query, collection, where, getDocs, serverTimestamp, updateDoc } from "firebase/firestore";
+import {
+  getDoc,
+  doc,
+  query,
+  collection,
+  where,
+  getDocs,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 
 export default function ConfirmationModal({ props }) {
   const router = useRouter();
@@ -17,7 +24,6 @@ export default function ConfirmationModal({ props }) {
 
   const [open, setOpen] = useState(false);
   const [userId, setUserId] = useState("");
-  
 
   const [plan, setPlan] = useState({
     description: "",
@@ -30,12 +36,12 @@ export default function ConfirmationModal({ props }) {
   const userCollection = collection(db, "Users");
 
   async function getPlanDetails() {
-    if (user && user.email){
-      const q = query(userCollection, where("email", "==", user.email))
+    if (user && user.email) {
+      const q = query(userCollection, where("email", "==", user.email));
       const snapshot = await getDocs(q);
-      if (snapshot.docs.length>0){
+      if (snapshot.docs.length > 0) {
         const userData = snapshot.docs[0].data();
-        setUserId({userid:snapshot.docs[0].id});
+        setUserId({ userid: snapshot.docs[0].id });
       }
     }
 
@@ -54,12 +60,11 @@ export default function ConfirmationModal({ props }) {
   const handleSubmit = async (e) => {
     const userRef = doc(db, "Users", userId.userid);
     const docRef = await updateDoc(userRef, {
-      plan:props.id,
-      limit:plan.devices,
-      validity:plan.validity,
+      plan: props.id,
+      limit: plan.devices,
+      validity: plan.validity,
       date: serverTimestamp(),
     }).then(router.push(`/confirmation`));
-
   };
 
   return (
@@ -83,7 +88,7 @@ export default function ConfirmationModal({ props }) {
             Confirm Your Subscription Plan.
           </Dialog.Title>
           <Dialog.Description className="text-mauve11 mt-[10px] mb-5 text-[15px] leading-normal">
-            Review your plan here. Click confirm when you&apos;re done. 
+            Review your plan here. Click confirm when you&apos;re done.
           </Dialog.Description>
 
           <div className={"mt-[10px] mb-5 text-[17px] font-medium text-black"}>

@@ -1,4 +1,3 @@
-//To Add Device if a plan exists
 
 "use client";
 import * as Dialog from "@radix-ui/react-dialog";

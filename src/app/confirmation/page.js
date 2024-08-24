@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import { useEffect } from "react";
 import Gradient from "@bedard/gradient";
@@ -25,10 +25,10 @@ export default withPageAuthRequired(function Page() {
             <div className="text-white/75"> Your Changes Have Been Saved.</div>
             <div className="py-2"></div>
             <Link href={"/user"}>
-            <div className="md:text-xl lg:text-3xl sm:text-sm">
-              Return to your {" "}
-              <div className="underline inline">dashboard.</div>
-            </div>
+              <div className="md:text-xl lg:text-3xl sm:text-sm">
+                Return to your{" "}
+                <div className="underline inline">dashboard.</div>
+              </div>
             </Link>
           </span>
 

@@ -1,14 +1,14 @@
 /**
  * Footer Component
- * 
+ *
  * Overview:
  * The Footer component is a React functional component designed to render the footer section of a web application. It is client-side rendered, optimizing performance and user experience. The component is structured to include multiple sections such as "About" and "Company", each containing a list of navigational links.
- * 
+ *
  * Key Features:
  * - Responsive Design: Utilizes Tailwind CSS for styling, ensuring the footer is responsive and adapts well to various screen sizes.
  * - Modular Structure: Organized into distinct sections for "About" and "Company", making it easy to expand with additional content or links.
  * - Hover Effects: Links within the footer have hover effects, enhancing the user interface and making the footer visually interactive.
- * 
+ *
  * Implementation Details:
  * - The component is wrapped in a `<div>` element, with the `<footer>` tag nested inside. This semantic HTML5 tag is used to represent the footer content of the document or section.
  * - Tailwind CSS classes are extensively used for styling, including setting the text color, width, margin, padding, and flexbox properties for layout and alignment.
@@ -16,10 +16,10 @@
  * - The section titles are marked up with `<h2>` tags, indicating their importance in the document structure and aiding in accessibility.
  * - Navigation links within each section are organized in a `<nav>` element containing a list (`<ul>`), where each item (`<li>`) holds a link (`<a>`). This structure is beneficial for SEO and improves the website's navigation accessibility.
  * - The links are styled to change color on hover, providing visual feedback to the user.
- * 
+ *
  * Usage:
  * This component is intended to be used as the footer for a web application or website. It provides essential navigational links and information about the company in a structured and visually appealing manner.
- * 
+ *
  * Example Use Case:
  * In a corporate website, the Footer component could include sections for "About" with links to company news and team introductions, and "Company" with links to regulatory information and other corporate resources. This setup helps users navigate to important information about the company directly from the footer.
  */

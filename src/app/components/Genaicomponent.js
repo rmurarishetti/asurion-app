@@ -1,5 +1,4 @@
 "use client";
-//Gen AI Component to recommend something to the user
 import Image from "next/image";
 import { ai } from "../../../public";
 import { layout } from "../constants/styles";
@@ -12,7 +11,7 @@ import { collection, getDocs } from "@firebase/firestore";
 export default function GenAIComponent(props) {
   const [aitext, setAitext] = useState("");
   const [loading, setLoading] = useState(false);
-  // Wrap in an async function so you can use await
+  const [generating, setGenerating] = useState(false);
 
   const deviceCollection = collection(db, `Users/${props.id}/Devices`);
 
@@ -21,7 +20,6 @@ export default function GenAIComponent(props) {
     const snapshot = await getDocs(deviceCollection);
 
     const date = new Date().toDateString();
-    //const expiryDate = new Date(props.date).toDateString();
 
     console.log(date);
 
@@ -42,12 +40,8 @@ export default function GenAIComponent(props) {
   }
 
   async function recommend() {
-    // Provide a prompt that contains text
     setLoading(true);
-    //const prompt = "Write a story about a magic backpack limited to 100 words.";
-
-    // To generate text output, call generateContent with the text input
-    
+    setGenerating(true);
 
     const newPrompt = await promptGeneration();
     const result = await model.generateContent(newPrompt);
@@ -55,9 +49,9 @@ export default function GenAIComponent(props) {
 
     const response = result.response;
     const text = response.text();
-    //console.log(text);
+
     setAitext(text);
-    setLoading(false);
+    setGenerating(false);
   }
 
   return (
@@ -66,9 +60,7 @@ export default function GenAIComponent(props) {
         <div className="text-[20px] text-white flex justify-start items-center">
           <Image
             src={ai}
-            className={`inline h-[32px] w-[32px] bg-white rounded-full py-1 mr-2 ${
-              loading == true ? " animate-spin" : ""
-            }`}
+            className={`inline h-[32px] w-[32px] bg-white rounded-full py-1 mr-2 animate-pulse`}
           />
           <div className="bg-gradient-to-r from-[#6ec3f4] via-[#8484ff] to-[#ff61ab] inline text-transparent bg-clip-text">
             Asurion&nbsp;
@@ -81,19 +73,21 @@ export default function GenAIComponent(props) {
           associated benefits.
         </div>
 
-        <div className="rounded-md font-playfair bg-white text-[18px] w-1/2 flex mx-4 p-5">
-          <Image
-            src={ai}
-            className={`inline h-[32px] w-[32px] bg-[#041E49]/95 rounded-full py-1 mr-2 ${
-              loading == true ? " animate-pulse" : ""
-            }`}
-          />
-          <div className="bg-gradient-to-r from-[#6ec3f4] via-[#8484ff] to-[#ff61ab] inline text-transparent bg-clip-text">
-            AI&nbsp;
-          </div>{" "}
-          <br />
-          {aitext}
-        </div>
+        {loading && (
+          <div className="rounded-md font-playfair bg-white text-[18px] w-1/2 flex mx-4 p-5">
+            <Image
+              src={ai}
+              className={`inline h-[32px] w-[32px] bg-[#041E49]/95 rounded-full py-1 mr-2 ${
+                generating == true ? " animate-spin" : ""
+              }`}
+            />
+            <div className="bg-gradient-to-r from-[#6ec3f4] via-[#8484ff] to-[#ff61ab] inline text-transparent bg-clip-text">
+              AI&nbsp;
+            </div>{" "}
+            <br />
+            {aitext}
+          </div>
+        )}
 
         <div className="flex w-full items-center justify-center mt-2">
           <button

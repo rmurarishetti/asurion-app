@@ -1,4 +1,3 @@
-//Component for Displaying User Plan and Devices Associated
 import { layout } from "../constants/styles";
 import styles from "../constants/styles";
 import { MdOutlineStars } from "react-icons/md";
@@ -37,7 +36,7 @@ export default function UserPlanStatus(props) {
 
       setDeviceArr(snapshot.docs);
       if (snapshot.docs.length < limit) {
-          setAddDeviceBtn(true);
+        setAddDeviceBtn(true);
       } else {
         setAddDeviceBtn(false);
       }
@@ -82,7 +81,6 @@ export default function UserPlanStatus(props) {
             >
               Services
             </div>
-            {/* Asurion Basic covers upto 3 devices for a year from all damages, repairs and maintainence costs. The devices can range from phones, tablets to laptops. */}
           </div>
           <div className="flex flex-col justify-between h-full mt-2">
             <div className="flex flex-col space-y-4">
