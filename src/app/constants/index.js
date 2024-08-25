@@ -7,7 +7,12 @@ export const NavLinks = [
   {
     id: "start",
     title: "Get Started",
-    link: "/#start",
+    link: "/#features",
+  },
+  {
+    id: "pricing",
+    title: "Pricing",
+    link: "/#pricing",
   },
   {
     id: "signin",
